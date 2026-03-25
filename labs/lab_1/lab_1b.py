@@ -16,6 +16,12 @@ def check(prompt: str) -> float:
         except ValueError:
             print("Invalid number")
 
+def checkOP(prompt):
+    if prompt == "add" or prompt == "subtract" or prompt == "multiply" or prompt == "divide":
+        return prompt
+    else:
+        return False
+
 def simple_calculator(operation: str, num1: float, num2: float) -> float:
     """
     Function that takes in two numbers and an operation (add, subtract, multiply, divide),
@@ -51,11 +57,14 @@ def main():
     # Ask the user for sample input    
     num1 = check("Enter the first number: ")
     num2 = check("Enter the second number: ")
-    operation = input("Enter the operation (add, subtract, multiply, divide): ").strip().lower()
+    operation = checkOP(input("Enter the operation (add, subtract, multiply, divide): ").strip().lower())
+    if operation:
+        # Perform the calculation and display the result
+        result = simple_calculator(operation, num1, num2)
+        print(f"The result of {operation}ing {num1} and {num2} is: {result}")
+    else:
+        print("Invalid Operation. Try again.")
 
-    # Perform the calculation and display the result
-    result = simple_calculator(operation, num1, num2)
-    print(f"The result of {operation}ing {num1} and {num2} is: {result}")
 
 
 if __name__ == "__main__":
