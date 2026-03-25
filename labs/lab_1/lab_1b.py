@@ -8,6 +8,19 @@ The script asks the user to input the numbers and the operation to be performed,
 and prints the result to the terminal window.
 
 """
+def check(prompt: str) -> float:
+    while True:
+        try:
+            number = float(input(prompt))
+            return number
+        except ValueError:
+            print("Invalid number")
+
+def checkOP(prompt):
+    if prompt == "add" or prompt == "subtract" or prompt == "multiply" or prompt == "divide":
+        return prompt
+    else:
+        return False
 
 def simple_calculator(operation: str, num1: float, num2: float) -> float:
     """
@@ -42,13 +55,16 @@ def main():
     print(f"===== Simple Calculator =====")
 
     # Ask the user for sample input    
-    num1 = float(input("Enter the first number: "))
-    num2 = float(input("Enter the second number: "))
-    operation = input("Enter the operation (add, subtract, multiply, divide): ").strip().lower()
+    num1 = check("Enter the first number: ")
+    num2 = check("Enter the second number: ")
+    operation = checkOP(input("Enter the operation (add, subtract, multiply, divide): ").strip().lower())
+    if operation:
+        # Perform the calculation and display the result
+        result = simple_calculator(operation, num1, num2)
+        print(f"The result of {operation}ing {num1} and {num2} is: {result}")
+    else:
+        print("Invalid Operation. Try again.")
 
-    # Perform the calculation and display the result
-    result = simple_calculator(operation, num1, num2)
-    print(f"The result of {operation}ing {num1} and {num2} is: {result}")
 
 
 if __name__ == "__main__":
